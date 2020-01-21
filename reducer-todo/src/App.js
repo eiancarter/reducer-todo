@@ -11,7 +11,8 @@ function App() {
           ...state,
           {
             id: new Date(),
-            todo: action.todo
+            todo: action.todo,
+            completed: false
           }
         ]
       case 'REMOVE-TODO':
@@ -21,9 +22,8 @@ function App() {
         return [];
       
       case 'TOGGLE-TODO':
-        return [
-
-        ]
+        return !action.completed; 
+        
 
       default:
       return state;
@@ -40,13 +40,6 @@ function App() {
     inputRef.current.value = '';
   }
 
-  const handleToggleComplete = id => {
-    // dispatch({
-    //   type: 'TOGGLE-TODO',
-    //   todo: 
-    // })
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -60,11 +53,20 @@ function App() {
         </button>
         <ul>
           {items.map( (item, index) =>
-            <li key={item.id} onClick={()=> ({type: 'TOGGLE-TODO'})}>
+            <li 
+              key={item.id} 
+              style={item.completed ? {textDecoration: 'line-through' } : null}
+            >
               {item.todo}
               <button onClick={
                 () => {dispatch({ type: 'REMOVE-TODO', index})}}
-              > Remove Todo
+              > 
+                Remove Todo
+              </button>
+              <button onClick={
+                () => dispatch({type: 'TOGGLE-TODO', index})} 
+              >
+                Toggle Complete
               </button>
             </li>
           )}
