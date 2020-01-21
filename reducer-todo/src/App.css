@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+input {
+  display: flex;
+  width: 300px;
+  padding: 5px;
+}
+button {
+  margin-top: 16px;
+  background: green;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.clear-btn {
+  margin-top: 16px;
+  background: lightblue;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.item.completed {
+  background-color: red;
+  color: white;
+  text-decoration: line-through;
+  width: 100%;
+}

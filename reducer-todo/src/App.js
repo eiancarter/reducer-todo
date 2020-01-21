@@ -10,15 +10,20 @@ function App() {
         return [
           ...state,
           {
-            id: state.length,
+            id: new Date(),
             todo: action.todo
           }
         ]
       case 'REMOVE-TODO':
-        return state.filter((_, index) => index != action.index);
+        return state.filter((_, index) => index !== action.index);
       
       case 'CLEAR-TODOS':
         return [];
+      
+      case 'TOGGLE-TODO':
+        return [
+
+        ]
 
       default:
       return state;
@@ -34,6 +39,14 @@ function App() {
     })
     inputRef.current.value = '';
   }
+
+  const handleToggleComplete = id => {
+    // dispatch({
+    //   type: 'TOGGLE-TODO',
+    //   todo: 
+    // })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -41,10 +54,14 @@ function App() {
         <form onSubmit={handleSubmit}>
           <input ref={inputRef}/>
         </form>
-        <button onClick={() => dispatch({ type: 'CLEAR-TODOS' })}>Clear</button>
+        <button className='clear-btn' onClick={
+          () => dispatch({ type: 'CLEAR-TODOS' })}
+        >Clear
+        </button>
         <ul>
           {items.map( (item, index) =>
-            <li key={item.id}>{item.todo}
+            <li key={item.id} onClick={()=> ({type: 'TOGGLE-TODO'})}>
+              {item.todo}
               <button onClick={
                 () => {dispatch({ type: 'REMOVE-TODO', index})}}
               > Remove Todo
