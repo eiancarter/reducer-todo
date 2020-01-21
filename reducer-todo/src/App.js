@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -11,13 +11,17 @@ function App() {
           ...state,
           {
             id: state.length,
-            name: action.todo
+            todo: action.todo
           }
         ]
       case 'REMOVE-TODO':
-        return [
+        return state.filter((_, index) => index != action.index);
+      
+      case 'CLEAR-TODOS':
+        return [];
 
-        ]
+      default:
+      return state;
     }
   }, []);
 
@@ -33,17 +37,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>hello</h1>
+        <h1>Todo List</h1>
         <form onSubmit={handleSubmit}>
           <input ref={inputRef}/>
         </form>
-          <ul>
-            {items.map( (item, index) => {
-              <li key={item.id}>{item.todo}<button onClick={() => {
-                dispatch({ type: 'REMOVE-TODO', index})
-              }}></button></li>
-            })}
-          </ul>
+        <button onClick={() => dispatch({ type: 'CLEAR-TODOS' })}>Clear</button>
+        <ul>
+          {items.map( (item, index) =>
+            <li key={item.id}>{item.todo}
+              <button onClick={
+                () => {dispatch({ type: 'REMOVE-TODO', index})}}
+              > Remove Todo
+              </button>
+            </li>
+          )}
+        </ul>
       </header>
     </div>
   );
