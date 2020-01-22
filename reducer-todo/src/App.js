@@ -22,9 +22,8 @@ function App() {
         return [];
       
       case 'TOGGLE-TODO':
-        return !action.completed; 
-        
-
+        return state.items.map((item ,index) => index === action.index ? {...item, completed: !item.completed} : item)
+ 
       default:
       return state;
     }
@@ -51,11 +50,11 @@ function App() {
           () => dispatch({ type: 'CLEAR-TODOS' })}
         >Clear
         </button>
-        <ul>
+        <ul className='list'>
           {items.map( (item, index) =>
             <li 
               key={item.id} 
-              style={item.completed ? {textDecoration: 'line-through' } : null}
+              style = {{ textDecoration : item.completed ? 'line-through' : null }}
             >
               {item.todo}
               <button onClick={
@@ -64,7 +63,7 @@ function App() {
                 Remove Todo
               </button>
               <button onClick={
-                () => dispatch({type: 'TOGGLE-TODO', index})} 
+                () => dispatch({ type: 'TOGGLE-TODO', index })} 
               >
                 Toggle Complete
               </button>

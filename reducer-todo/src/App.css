@@ -42,11 +42,12 @@ input {
   padding: 5px;
 }
 button {
-  margin-top: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
   background: green;
   color: white;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .clear-btn {
@@ -55,10 +56,4 @@ button {
   color: white;
   font-weight: bold;
   font-size: 1.5rem;
-}
-.item.completed {
-  background-color: red;
-  color: white;
-  text-decoration: line-through;
-  width: 100%;
 }
